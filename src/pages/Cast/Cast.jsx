@@ -1,25 +1,44 @@
-// import { useEffect, useState } from 'react';
-// import { fetchTrends } from 'api/TMBD-movie-api';
-// import { useLocation } from 'react-router-dom';
-import { Title } from './Cast.styled';
-// import MovieList from '../../component/MovieList/MovieList';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { fetchCast } from '../../services/filmsApi';
+import { List, Item, Description, Label } from './Cast.styled';
 
 const Cast = () => {
-  // const location = useLocation();
-  // const [trends, setTrends] = useState([]);
+  const [credits, setCredits] = useState([]);
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   fetchTrends().then(data => setTrends(data.results));
-  // }, []);
+  useEffect(() => {
+    fetchCast(id).then(({ cast }) => setCredits(cast));
+  }, [id]);
 
   return (
     <>
-      <Title>Cast</Title>
-      {/* {trends && trends.length > 0 && (
-        <MovieList movies={trends} location={location} />
-      )} */}
+      <List>
+        {credits &&
+          credits.length > 0 &&
+          credits.map(actor => (
+            <Item key={actor?.id}>
+              {actor.profile_path ? (
+                <img
+                  src={'https://image.tmdb.org/t/p/w300' + actor?.profile_path}
+                  alt={actor?.original_name}
+                  width="100px"
+                />
+              ) : null}
+
+              <div>
+                <Description>
+                  <Label>Character:</Label> {actor?.character}
+                </Description>
+                <Description>
+                  <Label>Name:</Label> {actor?.original_name}
+                </Description>
+              </div>
+            </Item>
+          ))}
+      </List>
     </>
   );
-}
+};
 
 export default Cast;

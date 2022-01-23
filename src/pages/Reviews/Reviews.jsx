@@ -1,23 +1,47 @@
-// import { useEffect, useState } from 'react';
-// import { fetchTrends } from 'api/TMBD-movie-api';
-// import { useLocation } from 'react-router-dom';
-import { Title } from './Reviews.styled';
-// import MovieList from '../../component/MovieList/MovieList';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { fetchReviews } from '../../services/filmsApi';
+import { List, Item, Wrapper, Description, Lebel } from './Reviews.styled';
 
-const Reviews = () => {
-  // const location = useLocation();
-  // const [trends, setTrends] = useState([]);
-
-  // useEffect(() => {
-  //   fetchTrends().then(data => setTrends(data.results));
-  // }, []);
-
+function Reviews() {
+  const [reviews, setReviews] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    fetchReviews(id).then(({ results }) => setReviews(results));
+  }, [id]);
   return (
     <>
-      <Title>Reviews</Title>
-      {/* {trends && trends.length > 0 && (
-        <MovieList movies={trends} location={location} />
-      )} */}
+      <List>
+        {reviews
+          ? reviews.length > 0
+            ? reviews.map(review => (
+                <Item key={review?.id}>
+                  <Wrapper>
+                    {review.author_details.avatar_path ? (
+                      <img
+                        src={
+                          review.author_details.avatar_path.includes('http')
+                            ? review.author_details.avatar_path.slice(1)
+                            : 'https://image.tmdb.org/t/p/w300' +
+                              review?.author_details.avatar_path
+                        }
+                        alt={review?.author}
+                        width="80px"
+                      />
+                    ) : null}
+
+                    <Description>
+                      <Lebel>NickName:</Lebel> {review?.author}
+                    </Description>
+                  </Wrapper>
+                  <Description>
+                    <Lebel>Review:</Lebel> {review?.content}
+                  </Description>
+                </Item>
+              ))
+            : "We don't have any reviews for this movie"
+          : null}
+      </List>
     </>
   );
 }

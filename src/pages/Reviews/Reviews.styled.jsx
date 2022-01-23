@@ -1,29 +1,26 @@
 import styled from "styled-components";
 
-export const Title = styled.h2`
-  text-align: center;
-  text-transform: uppercase;
-  cursor: default;
-`;
-
 export const List = styled.ul`
   display: flex;
-  flex-wrap: wrap;
-  margin-left: -20px;
-  margin-top: -20px;
-  padding: 20px 0;
+  flex-direction: column;
+  padding: 0;
+  padding-left: 5px;
 `;
-
 export const Item = styled.li`
-  flex-basis: calc(100% / 2 - 20px);
-  margin-left: 20px;
-  margin-top: 20px;
-  opacity: 1;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover,
-  &:focus {
-    color: #02be6e;
-    opacity: 0.8;
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  display: block;
+  background: green;
+  padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+`;
+export const Wrapper = styled.div`
+  display: flex;
+`;
+export const Description = styled.p`
+  padding-top: 10px;
+  margin-left: 10px;
+`;
+export const Lebel = styled.span`
+  padding-right: 10px;
+  font-weight: 700;
 `;

@@ -2,7 +2,7 @@ import Template from 'react-loader-spinner';
 import React from 'react';
 import { LoaderWraper } from './Loader.styled';
 
-function Loader () {
+const Loader = () => {
   return (
     <LoaderWraper>
       <Template

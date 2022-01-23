@@ -1,10 +1,11 @@
-import Navigation from '../Navigation';
+import MainNavigation from '../MainNavigation';
 import { Header } from './AppBar.styled';
 
-export default function AppBar() {
+const AppBar = () => {
   return (
-  <Header>
-    <Navigation/>
-  </Header>
+    <Header>
+      <MainNavigation />
+    </Header>
   );
-}
+};
+export default AppBar;
