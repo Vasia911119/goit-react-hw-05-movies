@@ -9,22 +9,12 @@ const MovieNavigation = () => {
       <b>Additional information</b>
       <List>
         <Item>
-          <MovieNavigationLink
-            to={{
-              pathname: `cast `,
-              state: { ...location.state },
-            }}
-          >
+          <MovieNavigationLink to={`cast`} state={{ ...location.state }}>
             Cast
           </MovieNavigationLink>
         </Item>
         <Item>
-          <MovieNavigationLink
-            to={{
-              pathname: `reviews`,
-              state: { ...location.state },
-            }}
-          >
+          <MovieNavigationLink to={`reviews`} state={{ ...location.state }}>
             Reviews
           </MovieNavigationLink>
         </Item>

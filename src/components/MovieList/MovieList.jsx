@@ -15,10 +15,8 @@ const MovieList = ({ movies, location }) => {
       {movies.map(({ id, original_title, poster_path }) => (
         <Item key={id}>
           <MovieLink
-            to={{
-              pathname: `/movies/${id}`,
-              state: { from: location },
-            }}
+            to={{ pathname: `/movies/${id}` }}
+            state={{ from: location }}
           >
             {
               <>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import MovieNavigation from '../../components/MovieNavigation';
 import GoBackButton from '../../components/GoBackButton';
 import { fetchMovieById } from '../../services/filmsApi';
@@ -10,6 +10,7 @@ import { NavMenu } from './MovieInfoPage.styled';
 const MovieInfoPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [movie, setMovie] = useState({});
 
@@ -20,7 +21,7 @@ const MovieInfoPage = () => {
   }, [id]);
 
   function handleGoBack() {
-    navigate(-1);
+    navigate(location?.state?.from ?? '/');
   }
 
   return (
